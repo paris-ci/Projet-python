@@ -28,7 +28,7 @@ def bienvenue():
 
 def fdebug(message):
 	if "d" in debug :
-		print(ORANGE + message + NORMAL)
+		print(JAUNE + message + NORMAL)
 def ferror(message):
 	if "d" in debug :
 		print(ROUGE + message + NORMAL)
@@ -54,13 +54,13 @@ def testtaille(min,max):
 				test2 = "1"
 			else :
 				print "Ton nombre est trop grand !"
-				#ferror("Trop grand (" + str(nombre) + " > " + str(max) + ")")
+				ferror("Trop grand (" + str(nombre) + " > " + str(max) + ")")
 				
 			if min <= nombre :
 				test3 = "1"
 			else :
 				print "Ton nombre est trop petit !"
-				#ferror("Trop petit (" + str(nombre) + " < " + str(min) + ")")
+				ferror("Trop petit (" + str(nombre) + " < " + str(min) + ")")
 			if test2 and test3 == "1" :
 				fdebug("Ok !")
 				test = "1"
