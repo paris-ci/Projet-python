@@ -4,6 +4,7 @@
 # MODULES
 
 import os
+import random
 
 # COULEURS
 
@@ -78,14 +79,16 @@ def couleur():
 				ferror("Entrée incorecte")
 				print "Choisis une couleur !"
 			else :
-				couleur = "n"
+				couleur = "1" #noir = 1
 				ok = "1"
 		else:
-			couleur = "r"
+			couleur = "2" #rouge = 2
 			ok = "1"
 
 def random():
-	print ""
+	resultat_couleur = random.randint(1,2)
+	resultat_nombre = random.randint(1,50)
+	
 		
 # MAIN
 
@@ -95,4 +98,3 @@ debug = raw_input("Tape entrée pour jouer !")
 testtaille(1,50)
 couleur()
 random()
-prisedeparis()
