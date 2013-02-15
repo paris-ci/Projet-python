@@ -64,6 +64,28 @@ def testtaille(min,max):
 			if test2 and test3 == "1" :
 				fdebug("Ok !")
 				test = "1"
+
+def couleur():
+	global nombre
+	couleur = ""
+	global couleur
+	ok = "0"
+	while ok is not "1" :
+		couleur = raw_input("Noir ou rouge ? (n/r)")
+		if "r" is not couleur:
+			fdebug("Pas de R")
+			if "n" is not couleur:
+				ferror("Entrée incorecte")
+				print "Choisis une couleur !"
+			else :
+				couleur = "n"
+				ok = "1"
+		else:
+			couleur = "r"
+			ok = "1"
+
+def random():
+	print ""
 		
 # MAIN
 
@@ -71,5 +93,6 @@ bienvenue()
 debug = "c"
 debug = raw_input("Tape entrée pour jouer !")
 testtaille(1,50)
-
-print "tout vas bien"
+couleur()
+random()
+prisedeparis()
