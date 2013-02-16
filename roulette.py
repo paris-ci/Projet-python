@@ -41,9 +41,9 @@ def progressbar():
 	sys.stdout.write("\b" * (toolbar_width+1)) # return to start of line, after '['
 
 	for i in xrange(toolbar_width):
-		time.sleep(0.1) # do real work here
+		time.sleep(0.07) # do real work here
 		# update the bar
-		sys.stdout.write("-")
+		sys.stdout.write("~")
 		sys.stdout.flush()
 	sys.stdout.write("\n")
 
@@ -67,7 +67,7 @@ def partie():
 			if nombre_mise > 49:
 				print(ROUGE + "Ce nombre est superieur a 49" + NORMAL)
  
-		# A present, on selectionne la somme A miser sur le nombre
+		# A present, on selectionne la somme a miser sur le nombre
 		mise = 0
 		while mise <= 0 or mise > argent:
 			mise = input(VERT + "Tapez le montant de votre mise : >>>" + NORMAL)
@@ -81,21 +81,20 @@ def partie():
 			if mise <= 0:
 				print(ROUGE + "La mise saisie est negative ou nulle." + NORMAL)
 			if mise > argent:
-				print(ROUGE + "Vous ne pouvez miser autant, vous n'avez que" + argent + "$" + NORMAL)
+				print(ROUGE + "Vous ne pouvez miser autant, vous n'avez que" + argent + "€" + NORMAL)
  
-		# Le nombre mise et la mise ont ete selectionnes par
-		# l'utilisateur, on fait tourner la roulette
+		# Le nombre mise et la mise ont ete selectionnes par l'utilisateur, on fait tourner la roulette
 		numero_gagnant = randrange(50)
 		print(BLEU + "La roulette tourne... " + NORMAL ) 
  		progressbar()
- 		print(BLEU + "... et s'arrête sur le numero : " + JAUNE + str(numero_gagnant) + NORMAL)
+ 		print(BLEU + "... et s'arrête sur le numero : " + CYAN + str(numero_gagnant) + NORMAL)
 		# On etablit le gain du joueur
 		if numero_gagnant == nombre_mise:
-			print(VERT + "Felicitations ! Vous obtenez " + str(mise * 3) + "$ !" + NORMAL)
+			print(VERT + "Felicitations ! Vous avez miser sur le BON chiffre ! Vous obtenez " + str(mise * 3) + "€ !" + NORMAL)
 			argent += mise * 3
 		elif numero_gagnant % 2 == nombre_mise % 2: # ils sont de la même couleur
 			mise = ceil(mise * 0.5)
-			print(VERT + "Vous avez mise sur la bonne couleur. Vous obtenez " + str(mise) + "$" + NORMAL)
+			print(VERT + "Vous avez mise sur la bonne couleur. Vous obtenez " + str(mise) + "€" + NORMAL)
 			argent += mise
 		else:
 			print(JAUNE + "Vous perdez votre mise : vous n'avez pas mise sur la bonne couleur ni sur le bon chiffre" + NORMAL)
@@ -107,7 +106,7 @@ def partie():
 			continuer_partie = False
 		else:
 			# On affiche l'argent du joueur
-			print(VERT + "Vous avez a present " + str(argent) + "$" + NORMAL)
+			print(VERT + "Vous avez a present " + str(argent) + "€" + NORMAL)
 			quitter = raw_input(BLEU + "Souhaitez-vous quitter le casino (o/n) ? >>>" + NORMAL)
 			if quitter == "o" or quitter == "O":
 				print(ROUGE + "Vous quittez le casino avec vos gains." + NORMAL)
@@ -117,12 +116,21 @@ def partie():
 bienvenue()
 
 # Declaration des variables de depart
-argent = 1000 # On a 1000 $ au debut du jeu
+nom = raw_input("Quel est votre nom ?")
+argent = 1000 # On a 1000 € au debut du jeu
+read = open(nom + ".txt","r")
+for ligne in read:
+	print ligne
+	argent = int(ligne)
+if argent == 0:
+	argent = 100
 global argent
 continuer_partie = True # Booleen qui est vrai tant qu'on doit continuer la partie
 
-print(VERT + "Vous vous installez devant la roue avec exactement " +  str(argent) + "$." + NORMAL)
+print(VERT + "Vous vous installez devant la roue avec exactement " +  str(argent) + "€." + NORMAL)
 
 
 partie()
+sauvgarde = open(nom + ".txt","w")
+sauvgarde.write(str(argent))
 #############################################
